@@ -1,0 +1,23 @@
+{
+    "name": "adminlte-v4-laravel-assets",
+    "version": "1.0.0",
+    "description": "AdminLTE v4.0.0-rc4 assets for Laravel with Vite",
+    "main": "resources/js/adminlte.js",
+    "scripts": {
+        "dev": "vite",
+        "build": "vite build",
+        "preview": "vite preview"
+    },
+    "dependencies": {
+        "admin-lte": "^4.0.0-rc4",
+        "bootstrap": "^5.3.7",
+        "bootstrap-icons": "^1.13.1",
+        "overlayscrollbars": "^2.11.0",
+        "sweetalert2": "^11.14.5",
+        "toastify-js": "^1.12.0"
+    },
+    "devDependencies": {
+        "vite": "^5.0.0",
+        "sass": "^1.69.0"
+    }
+}

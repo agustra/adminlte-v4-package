@@ -1,0 +1,46 @@
+{
+    "name": "agus-usk/adminlte-v4-package",
+    "description": "AdminLTE v4.0.0-rc4 dari ColorlibHQ untuk Laravel dengan controller dan routes otomatis",
+    "type": "library",
+    "license": "MIT",
+    "keywords": ["laravel", "adminlte", "admin", "dashboard", "bootstrap", "vite"],
+    "authors": [
+        {
+            "name": "Agus USK",
+            "email": "agus@example.com"
+        }
+    ],
+    "homepage": "https://github.com/username/adminlte-v4-package",
+    "support": {
+        "issues": "https://github.com/username/adminlte-v4-package/issues",
+        "source": "https://github.com/username/adminlte-v4-package"
+    },
+    "autoload": {
+        "psr-4": {
+            "AgusUsk\\AdminLte\\": "src/"
+        }
+    },
+    "require": {
+        "php": "^8.2",
+        "spatie/laravel-package-tools": "^1.92"
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "AgusUsk\\AdminLte\\Providers\\AdminLteServiceProvider"
+            ]
+        }
+    },
+    "scripts": {
+        "post-install-cmd": [
+            "@php -r \"echo 'AdminLTE v4 Package installed successfully!\\n';\"',
+            "@php -r \"echo 'Run: php artisan adminlte:publish-assets to publish assets\\n';\""
+        ],
+        "post-update-cmd": [
+            "@php -r \"echo 'AdminLTE v4 Package updated successfully!\\n';\"',
+            "@php -r \"echo 'Run: php artisan adminlte:publish-assets to update assets\\n';\""
+        ]
+    },
+    "minimum-stability": "stable",
+    "prefer-stable": true
+}
