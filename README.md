@@ -18,14 +18,14 @@ Package AdminLTE v4.0.0-rc4 dari ColorlibHQ dengan NPM + Vite bundling untuk per
         }
     ],
     "require": {
-        "agus-usk/adminlte-v4-package": "@dev"
+        "agustra/adminlte-v4-package": "@dev"
     }
 }
 ```
 
 #### 2. Install Package
 ```bash
-composer update agus-usk/adminlte-v4-package
+composer update agustra/adminlte-v4-package
 ```
 
 #### 3. Publish Assets (Otomatis)
@@ -37,7 +37,7 @@ php artisan adminlte:publish-assets
 
 #### 1. Install Package
 ```bash
-composer require agus-usk/adminlte-v4-package
+composer require agustra/adminlte-v4-package
 ```
 
 #### 2. Publish Assets
