@@ -24,6 +24,10 @@ class AdminLteServiceProvider extends PackageServiceProvider
         // Auto register routes
         Route::group(['namespace' => 'AgusUsk\AdminLte\Http\Controllers'], function () {
             Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
+            
+            // Example pages
+            Route::get('/examples/login', 'ExampleController@loginPage')->name('examples.login');
+            Route::get('/examples/register', 'ExampleController@registerPage')->name('examples.register');
         });
     }
 }

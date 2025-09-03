@@ -99,6 +99,32 @@
                     </ul>
                 </li>
                 
+                <li class="nav-header">EXAMPLES</li>
+                
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <i class="nav-icon bi bi-box-arrow-in-right"></i>
+                        <p>
+                            Auth Pages
+                            <i class="nav-arrow bi bi-chevron-right"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="{{ route('examples.login') }}" class="nav-link">
+                                <i class="nav-icon bi bi-circle"></i>
+                                <p>Login Page</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('examples.register') }}" class="nav-link">
+                                <i class="nav-icon bi bi-circle"></i>
+                                <p>Register Page</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                
                 <li class="nav-header">SYSTEM</li>
                 
                 <li class="nav-item">
