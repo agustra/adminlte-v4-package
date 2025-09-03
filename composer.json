@@ -1,5 +1,5 @@
 {
-    "name": "agus-usk/adminlte-v4-package",
+    "name": "agustra/adminlte-v4-package",
     "description": "AdminLTE v4.0.0-rc4 dari ColorlibHQ untuk Laravel dengan controller dan routes otomatis",
     "type": "library",
     "license": "MIT",
@@ -10,10 +10,10 @@
             "email": "agus@example.com"
         }
     ],
-    "homepage": "https://github.com/username/adminlte-v4-package",
+    "homepage": "https://github.com/agustra/adminlte-v4-package",
     "support": {
-        "issues": "https://github.com/username/adminlte-v4-package/issues",
-        "source": "https://github.com/username/adminlte-v4-package"
+        "issues": "https://github.com/agustra/adminlte-v4-package/issues",
+        "source": "https://github.com/agustra/adminlte-v4-package"
     },
     "autoload": {
         "psr-4": {
@@ -33,12 +33,12 @@
     },
     "scripts": {
         "post-install-cmd": [
-            "@php -r \"echo 'AdminLTE v4 Package installed successfully!\\n';\"',
-            "@php -r \"echo 'Run: php artisan adminlte:publish-assets to publish assets\\n';\""
+            "@php -r \"echo 'AdminLTE v4 Package installed successfully!\n';\"",
+            "@php -r \"echo 'Run: php artisan adminlte:publish-assets to publish assets\n';\""
         ],
         "post-update-cmd": [
-            "@php -r \"echo 'AdminLTE v4 Package updated successfully!\\n';\"',
-            "@php -r \"echo 'Run: php artisan adminlte:publish-assets to update assets\\n';\""
+            "@php -r \"echo 'AdminLTE v4 Package updated successfully!\n';\"",
+            "@php -r \"echo 'Run: php artisan adminlte:publish-assets to update assets\n';\""
         ]
     },
     "minimum-stability": "stable",
