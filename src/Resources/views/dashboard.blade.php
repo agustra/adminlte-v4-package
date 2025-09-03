@@ -94,6 +94,14 @@
                         </ul>
                     </div>
                     
+                    <div class="alert alert-info">
+                        <h5><i class="bi bi-info-circle"></i> AdminLTE v4 Source</h5>
+                        This package is based on <strong>AdminLTE v4.0.0-rc4</strong> from ColorlibHQ.<br>
+                        <a href="https://github.com/ColorlibHQ/AdminLTE" target="_blank" class="btn btn-sm btn-outline-info mt-2">
+                            <i class="bi bi-github"></i> View Original Repository
+                        </a>
+                    </div>
+                    
                     <div class="row mt-3">
                         <div class="col-md-6">
                             <h6>Test Notifications:</h6>
