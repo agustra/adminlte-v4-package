@@ -34,6 +34,19 @@ class PublishAssetsCommand extends Command
                 $distPath = $packagePath . 'dist';
                 if (File::exists($distPath)) {
                     File::copyDirectory($distPath, $publicPath);
+                    
+                    // Copy Bootstrap Icons fonts
+                    $fontsSourcePath = $packagePath . 'node_modules/bootstrap-icons/font/fonts';
+                    $fontsDestPath = $publicPath . '/fonts';
+                    
+                    if (File::exists($fontsSourcePath)) {
+                        if (!File::exists($fontsDestPath)) {
+                            File::makeDirectory($fontsDestPath, 0755, true);
+                        }
+                        File::copyDirectory($fontsSourcePath, $fontsDestPath);
+                        $this->info('Bootstrap Icons fonts copied successfully!');
+                    }
+                    
                     $this->info('Assets published to public/vendor/adminlte/');
                 } else {
                     $this->error('Build directory not found!');
