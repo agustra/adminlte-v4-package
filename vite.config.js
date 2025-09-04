@@ -29,18 +29,15 @@ export default defineConfig({
   css: {
     postcss: {
       plugins: [
-        postcssUrl([
-          {
-            filter: "**/bootstrap-icons.css",
-            url: (asset) => {
-              // ubah ./fonts/, /fonts/, atau fonts/ jadi ../fonts/
-              if (asset.url.match(/^(\.?\/)?fonts\//)) {
-                return asset.url.replace(/^(\.?\/)?fonts\//, "../fonts/");
-              }
-              return asset.url;
-            },
+        postcssUrl({
+          url: (asset) => {
+            // ubah ./fonts/, /fonts/, atau fonts/ jadi ../fonts/ untuk Laravel
+            if (asset.url.includes('bootstrap-icons') && asset.url.match(/^(\.?\/)?fonts\//)) {
+              return asset.url.replace(/^(\.?\/)?fonts\//, "../fonts/");
+            }
+            return asset.url;
           },
-        ]),
+        }),
       ],
     },
     preprocessorOptions: {
