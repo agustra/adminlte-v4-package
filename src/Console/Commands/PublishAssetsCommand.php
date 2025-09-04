@@ -14,11 +14,13 @@ class PublishAssetsCommand extends Command
     {
         $this->info('Publishing AdminLTE assets...');
         
-        // Create vendor/adminlte directory
+        // Handle existing vendor/adminlte directory
         $publicPath = public_path('vendor/adminlte');
-        if (!File::exists($publicPath)) {
-            File::makeDirectory($publicPath, 0755, true);
+        if (File::exists($publicPath)) {
+            $this->info('Existing assets found, replacing...');
+            File::deleteDirectory($publicPath);
         }
+        File::makeDirectory($publicPath, 0755, true);
         
         // Build assets first
         $packagePath = __DIR__ . '/../../../';
@@ -30,10 +32,20 @@ class PublishAssetsCommand extends Command
             if ($returnCode === 0) {
                 $this->info('Assets built successfully!');
                 
-                // Copy built assets
+                // Copy built assets selectively
                 $distPath = $packagePath . 'dist';
                 if (File::exists($distPath)) {
-                    File::copyDirectory($distPath, $publicPath);
+                    // Copy only specific folders, not the entire dist
+                    $foldersToSync = ['css', 'js', 'fonts'];
+                    
+                    foreach ($foldersToSync as $folder) {
+                        $sourcePath = $distPath . '/' . $folder;
+                        $destPath = $publicPath . '/' . $folder;
+                        
+                        if (File::exists($sourcePath)) {
+                            File::copyDirectory($sourcePath, $destPath);
+                        }
+                    }
                     
                     // Copy Bootstrap Icons fonts
                     $fontsSourcePath = $packagePath . 'node_modules/bootstrap-icons/font/fonts';
@@ -43,7 +55,11 @@ class PublishAssetsCommand extends Command
                         if (!File::exists($fontsDestPath)) {
                             File::makeDirectory($fontsDestPath, 0755, true);
                         }
-                        File::copyDirectory($fontsSourcePath, $fontsDestPath);
+                        // Copy individual font files to avoid overwriting
+                        $fontFiles = File::files($fontsSourcePath);
+                        foreach ($fontFiles as $fontFile) {
+                            File::copy($fontFile->getPathname(), $fontsDestPath . '/' . $fontFile->getFilename());
+                        }
                         $this->info('Bootstrap Icons fonts copied successfully!');
                     }
                     
