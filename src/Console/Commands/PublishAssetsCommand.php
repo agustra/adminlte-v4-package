@@ -32,11 +32,11 @@ class PublishAssetsCommand extends Command
             if ($returnCode === 0) {
                 $this->info('Assets built successfully!');
                 
-                // Copy built assets selectively
+                // Copy built assets selectively (skip vendor folder)
                 $distPath = $packagePath . 'dist';
                 if (File::exists($distPath)) {
-                    // Copy only specific folders, not the entire dist
-                    $foldersToSync = ['css', 'js', 'fonts'];
+                    // Only copy css, js, fonts - skip vendor folder completely
+                    $foldersToSync = ['css', 'js'];
                     
                     foreach ($foldersToSync as $folder) {
                         $sourcePath = $distPath . '/' . $folder;
@@ -47,15 +47,17 @@ class PublishAssetsCommand extends Command
                         }
                     }
                     
+                    // Create fonts folder manually
+                    $fontsDestPath = $publicPath . '/fonts';
+                    if (!File::exists($fontsDestPath)) {
+                        File::makeDirectory($fontsDestPath, 0755, true);
+                    }
+                    
                     // Copy Bootstrap Icons fonts
                     $fontsSourcePath = $packagePath . 'node_modules/bootstrap-icons/font/fonts';
-                    $fontsDestPath = $publicPath . '/fonts';
                     
                     if (File::exists($fontsSourcePath)) {
-                        if (!File::exists($fontsDestPath)) {
-                            File::makeDirectory($fontsDestPath, 0755, true);
-                        }
-                        // Copy individual font files to avoid overwriting
+                        // Copy individual font files
                         $fontFiles = File::files($fontsSourcePath);
                         foreach ($fontFiles as $fontFile) {
                             File::copy($fontFile->getPathname(), $fontsDestPath . '/' . $fontFile->getFilename());
