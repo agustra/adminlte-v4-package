@@ -31,9 +31,9 @@ export default defineConfig({
       plugins: [
         postcssUrl({
           url: (asset) => {
-            // ubah ./fonts/, /fonts/, atau fonts/ jadi ../fonts/ untuk Laravel
-            if (asset.url.includes('bootstrap-icons') && asset.url.match(/^(\.?\/)?fonts\//)) {
-              return asset.url.replace(/^(\.?\/)?fonts\//, "../fonts/");
+            // ubah semua variasi path font menjadi ../fonts/
+            if (asset.url.includes('bootstrap-icons')) {
+              return asset.url.replace(/^(\.?\/)?fonts\//, "../fonts/").replace(/^\/fonts\//, "../fonts/");
             }
             return asset.url;
           },
