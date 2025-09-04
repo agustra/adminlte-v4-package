@@ -41,17 +41,30 @@
             <!--begin::User Menu Dropdown-->
             <li class="nav-item dropdown user-menu">
                 <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
-                    <img src="https://ui-avatars.com/api/?name=User&background=007bff&color=fff" class="user-image rounded-circle shadow" alt="User Image">
-                    <span class="d-none d-md-inline">Alexander Pierce</span>
+                    @auth
+                        <img src="{{ auth()->user()->avatar ?? 'https://ui-avatars.com/api/?name='.urlencode(auth()->user()->name ?? 'User').'&background=007bff&color=fff' }}" class="user-image rounded-circle shadow" alt="User Image">
+                        <span class="d-none d-md-inline">{{ auth()->user()->name ?? 'User' }}</span>
+                    @else
+                        <img src="https://ui-avatars.com/api/?name=Guest&background=6c757d&color=fff" class="user-image rounded-circle shadow" alt="Guest">
+                        <span class="d-none d-md-inline">Guest User</span>
+                    @endauth
                 </a>
                 <ul class="dropdown-menu dropdown-menu-lg dropdown-menu-end">
                     <!--begin::User Image-->
                     <li class="user-header text-bg-primary">
-                        <img src="https://ui-avatars.com/api/?name=Alexander+Pierce&background=007bff&color=fff" class="rounded-circle shadow" alt="User Image">
-                        <p>
-                            Alexander Pierce - Web Developer
-                            <small>Member since Nov. 2023</small>
-                        </p>
+                        @auth
+                            <img src="{{ auth()->user()->avatar ?? 'https://ui-avatars.com/api/?name='.urlencode(auth()->user()->name ?? 'User').'&background=007bff&color=fff' }}" class="rounded-circle shadow" alt="User Image">
+                            <p>
+                                {{ auth()->user()->name ?? 'User' }} - {{ auth()->user()->email ?? 'No Email' }}
+                                <small>Member since {{ auth()->user()->created_at ? auth()->user()->created_at->format('M Y') : 'Unknown' }}</small>
+                            </p>
+                        @else
+                            <img src="https://ui-avatars.com/api/?name=Guest&background=6c757d&color=fff" class="rounded-circle shadow" alt="Guest">
+                            <p>
+                                Guest User
+                                <small>Not authenticated</small>
+                            </p>
+                        @endauth
                     </li>
                     <!--end::User Image-->
                     <!--begin::Menu Body-->
@@ -67,15 +80,23 @@
                     <!--end::Menu Body-->
                     <!--begin::Menu Footer-->
                     <li class="user-footer">
-                        <a href="#" class="btn btn-default btn-flat">Profile</a>
-                        @if(Route::has('logout'))
-                            <form method="POST" action="{{ route('logout') }}" class="d-inline">
-                                @csrf
-                                <button type="submit" class="btn btn-default btn-flat float-end">Sign out</button>
-                            </form>
+                        @if(Route::has('profile.show') || Route::has('profile'))
+                            <a href="{{ Route::has('profile.show') ? route('profile.show') : route('profile') }}" class="btn btn-default btn-flat">Profile</a>
                         @else
-                            <a href="#" class="btn btn-default btn-flat float-end" onclick="alert('Authentication package not installed')">Sign out</a>
+                            <a href="#" class="btn btn-default btn-flat" onclick="alert('Profile page not available')">Profile</a>
                         @endif
+                        @auth
+                            @if(Route::has('logout'))
+                                <form method="POST" action="{{ route('logout') }}" class="d-inline">
+                                    @csrf
+                                    <button type="submit" class="btn btn-default btn-flat float-end">Sign out</button>
+                                </form>
+                            @else
+                                <a href="#" class="btn btn-default btn-flat float-end" onclick="alert('Logout route not available')">Sign out</a>
+                            @endif
+                        @else
+                            <a href="{{ Route::has('login') ? route('login') : '#' }}" class="btn btn-default btn-flat float-end">Sign in</a>
+                        @endauth
                     </li>
                     <!--end::Menu Footer-->
                 </ul>
