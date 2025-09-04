@@ -4,11 +4,64 @@ Package AdminLTE v4.0.0-rc4 dari ColorlibHQ dengan NPM + Vite bundling untuk per
 
 > 📖 **Panduan Lengkap**: Lihat [INSTALLATION.md](INSTALLATION.md) untuk panduan instalasi yang detail.
 
-## Instalasi Cepat
+## 📦 Skenario Instalasi
 
-### Untuk Package Lokal (Development)
+### 🎨 **Skenario 1: Hanya UI AdminLTE (Tanpa Authentication)**
 
-#### 1. Tambahkan Repository Lokal ke composer.json
+Jika Anda hanya ingin menggunakan UI AdminLTE tanpa sistem authentication:
+
+```bash
+# Install UI package
+composer require agustra/adminlte-v4-package
+
+# Publish assets
+php artisan adminlte:publish-assets
+```
+
+**Hasil**: Dashboard AdminLTE siap digunakan di `/dashboard`
+
+### 🔐 **Skenario 2: UI + Authentication (Lengkap)**
+
+Jika Anda ingin UI AdminLTE dengan sistem authentication lengkap:
+
+```bash
+# Install UI package
+composer require agustra/adminlte-v4-package
+
+# Install authentication package
+composer require agustra/adminlte-auth-package
+
+# Publish assets UI
+php artisan adminlte:publish-assets
+
+# Install authentication system
+php artisan adminlte:install-auth
+
+# Jalankan migration
+php artisan migrate
+```
+
+**Hasil**: Sistem lengkap dengan login, register, dashboard, dan profile management
+
+### 🔧 **Skenario 3: Authentication ke UI yang Sudah Ada**
+
+Jika Anda sudah punya UI AdminLTE dan ingin menambah authentication:
+
+```bash
+# Install authentication package (akan auto-install UI dependency)
+composer require agustra/adminlte-auth-package
+
+# Install authentication system
+php artisan adminlte:install-auth
+
+# Jalankan migration
+php artisan migrate
+```
+
+## 🚀 Instalasi Cepat (Development)
+
+### Untuk Package Lokal
+
 ```json
 {
     "repositories": [
@@ -23,32 +76,10 @@ Package AdminLTE v4.0.0-rc4 dari ColorlibHQ dengan NPM + Vite bundling untuk per
 }
 ```
 
-#### 2. Install Package
 ```bash
 composer update agustra/adminlte-v4-package
-```
-
-#### 3. Publish Assets (Otomatis)
-```bash
 php artisan adminlte:publish-assets
 ```
-
-### Untuk Package dari Packagist (Production)
-
-#### 1. Install Package
-```bash
-composer require agustra/adminlte-v4-package
-```
-
-#### 2. Publish Assets
-```bash
-php artisan adminlte:publish-assets
-```
-
-> **Catatan**: Command `adminlte:publish-assets` akan otomatis:
-> - Install NPM dependencies
-> - Build assets dengan Vite
-> - Copy assets ke `public/vendor/adminlte/`
 
 ## Penggunaan
 
