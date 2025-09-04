@@ -68,10 +68,14 @@
                     <!--begin::Menu Footer-->
                     <li class="user-footer">
                         <a href="#" class="btn btn-default btn-flat">Profile</a>
-                        <form method="POST" action="{{ route('logout') }}" class="d-inline">
-                            @csrf
-                            <button type="submit" class="btn btn-default btn-flat float-end">Sign out</button>
-                        </form>
+                        @if(Route::has('logout'))
+                            <form method="POST" action="{{ route('logout') }}" class="d-inline">
+                                @csrf
+                                <button type="submit" class="btn btn-default btn-flat float-end">Sign out</button>
+                            </form>
+                        @else
+                            <a href="#" class="btn btn-default btn-flat float-end" onclick="alert('Authentication package not installed')">Sign out</a>
+                        @endif
                     </li>
                     <!--end::Menu Footer-->
                 </ul>
