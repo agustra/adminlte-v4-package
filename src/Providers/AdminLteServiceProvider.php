@@ -22,7 +22,10 @@ class AdminLteServiceProvider extends PackageServiceProvider
         $this->loadViewsFrom(__DIR__ . '/../Resources/views', 'adminlte');
         
         // Auto register routes
-        Route::group(['namespace' => 'AgusUsk\AdminLte\Http\Controllers'], function () {
+        Route::group([
+            'middleware' => ['web'],
+            'namespace' => 'AgusUsk\AdminLte\Http\Controllers'
+        ], function () {
             // Dashboard route - conditionally protected if auth package is installed
             $dashboardRoute = Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
             
