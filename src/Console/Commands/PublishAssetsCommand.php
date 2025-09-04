@@ -63,11 +63,22 @@ class PublishAssetsCommand extends Command
                     $fontsSourcePath = $packagePath . 'node_modules/bootstrap-icons/font/fonts';
                     
                     if (File::exists($fontsSourcePath)) {
-                        // Copy individual font files
+                        // Copy to vendor/adminlte/fonts/
                         $fontFiles = File::files($fontsSourcePath);
                         foreach ($fontFiles as $fontFile) {
                             File::copy($fontFile->getPathname(), $fontsDestPath . '/' . $fontFile->getFilename());
                         }
+                        
+                        // Also copy to public/fonts/ for direct access
+                        $publicFontsPath = public_path('fonts');
+                        if (!File::exists($publicFontsPath)) {
+                            File::makeDirectory($publicFontsPath, 0755, true);
+                        }
+                        
+                        foreach ($fontFiles as $fontFile) {
+                            File::copy($fontFile->getPathname(), $publicFontsPath . '/' . $fontFile->getFilename());
+                        }
+                        
                         $this->info('Bootstrap Icons fonts copied successfully!');
                     }
                     
