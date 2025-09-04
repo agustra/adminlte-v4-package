@@ -24,6 +24,14 @@ export default defineConfig({
         },
         assetsInlineLimit: 0
     },
+    experimental: {
+        renderBuiltUrl(filename, { hostType }) {
+            if (hostType === 'css' && filename.match(/\.(woff2?|eot|ttf|otf)$/)) {
+                return `../fonts/${filename}`;
+            }
+            return { relative: true };
+        }
+    },
     css: {
         preprocessorOptions: {
             scss: {
