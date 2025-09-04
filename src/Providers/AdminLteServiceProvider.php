@@ -23,7 +23,13 @@ class AdminLteServiceProvider extends PackageServiceProvider
         
         // Auto register routes
         Route::group(['namespace' => 'AgusUsk\AdminLte\Http\Controllers'], function () {
-            Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
+            // Dashboard route - conditionally protected if auth package is installed
+            $dashboardRoute = Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
+            
+            // Add auth middleware only if auth package is installed
+            if (class_exists('AgusUsk\AdminLteAuth\Providers\AuthServiceProvider')) {
+                $dashboardRoute->middleware('auth');
+            }
             
             // Example pages
             Route::get('/examples/login', 'ExampleController@loginPage')->name('examples.login');
