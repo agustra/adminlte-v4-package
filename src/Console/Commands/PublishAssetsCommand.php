@@ -73,10 +73,13 @@ class PublishAssetsCommand extends Command
                         $publicFontsPath = public_path('fonts');
                         if (!File::exists($publicFontsPath)) {
                             File::makeDirectory($publicFontsPath, 0755, true);
+                            $this->info('Created public/fonts/ directory');
                         }
                         
                         foreach ($fontFiles as $fontFile) {
-                            File::copy($fontFile->getPathname(), $publicFontsPath . '/' . $fontFile->getFilename());
+                            $destFile = $publicFontsPath . '/' . $fontFile->getFilename();
+                            File::copy($fontFile->getPathname(), $destFile);
+                            $this->info('Copied ' . $fontFile->getFilename() . ' to public/fonts/');
                         }
                         
                         $this->info('Bootstrap Icons fonts copied successfully!');
