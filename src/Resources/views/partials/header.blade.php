@@ -83,7 +83,11 @@
                         @if(Route::has('profile.show') || Route::has('profile'))
                             <a href="{{ Route::has('profile.show') ? route('profile.show') : route('profile') }}" class="btn btn-default btn-flat">Profile</a>
                         @else
-                            <a href="#" class="btn btn-default btn-flat" onclick="alert('Profile page not available')">Profile</a>
+                            @if(class_exists('AgusUsk\AdminLteAuth\Providers\AuthServiceProvider'))
+                                <a href="{{ route('profile') }}" class="btn btn-default btn-flat">Profile</a>
+                            @else
+                                <a href="#" class="btn btn-default btn-flat" onclick="alert('Profile page not available')">Profile</a>
+                            @endif
                         @endif
                         @auth
                             @if(Route::has('logout'))

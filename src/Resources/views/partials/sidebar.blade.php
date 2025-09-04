@@ -14,18 +14,20 @@
             <!--begin::Sidebar Menu-->
             <ul class="nav sidebar-menu flex-column" data-lte-toggle="treeview" role="navigation">
                 <li class="nav-item">
-                    <a href="#" class="nav-link active">
+                    <a href="{{ route('dashboard') }}" class="nav-link {{ request()->routeIs('dashboard') ? 'active' : '' }}">
                         <i class="nav-icon bi bi-speedometer"></i>
                         <p>Dashboard</p>
                     </a>
                 </li>
                 
+                @if(class_exists('AgusUsk\AdminLteAuth\Providers\AuthServiceProvider'))
                 <li class="nav-item">
-                    <a href="#" class="nav-link">
+                    <a href="{{ route('profile') }}" class="nav-link {{ request()->routeIs('profile') ? 'active' : '' }}">
                         <i class="nav-icon bi bi-person"></i>
                         <p>Profile</p>
                     </a>
                 </li>
+                @endif
                 
                 <li class="nav-item">
                     <a href="#" class="nav-link">
