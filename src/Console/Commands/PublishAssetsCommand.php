@@ -32,6 +32,12 @@ class PublishAssetsCommand extends Command
             if ($returnCode === 0) {
                 $this->info('Assets built successfully!');
                 
+                // Remove any vendor folder from dist to prevent recursive copy
+                $vendorPath = $packagePath . 'dist/vendor';
+                if (File::exists($vendorPath)) {
+                    File::deleteDirectory($vendorPath);
+                }
+                
                 // Copy built assets selectively (skip vendor folder)
                 $distPath = $packagePath . 'dist';
                 if (File::exists($distPath)) {
